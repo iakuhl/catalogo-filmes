@@ -1,0 +1,57 @@
+.modal {
+  width: min(460px, calc(100vw - 32px));
+  padding: 0;
+  border: 1px solid var(--cor-borda-forte);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.modal::backdrop {
+  background: rgba(10, 8, 6, 0.72);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.modal[open] {
+  animation: modal-entrada 200ms ease-out;
+}
+
+.modal__conteudo {
+  padding: 28px;
+}
+
+.modal__titulo {
+  margin-bottom: 10px;
+  font-size: 1.55rem;
+}
+
+.modal__mensagem {
+  margin: 0 0 28px;
+  color: var(--cor-texto-suave);
+}
+
+.modal__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@keyframes modal-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+
+@media (max-width: 480px) {
+  .modal__acoes {
+    flex-direction: column-reverse;
+  }
+
+  .modal__acoes .botao {
+    width: 100%;
+  }
+}

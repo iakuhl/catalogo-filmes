@@ -1,0 +1,75 @@
+.cartaz {
+  position: relative;
+  container-type: inline-size;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--raio);
+  background:
+    radial-gradient(90% 60% at 25% 12%, color-mix(in srgb, var(--cor-cartaz), #f3e9d8 22%) 0%, transparent 70%),
+    linear-gradient(
+      165deg,
+      var(--cor-cartaz) 0%,
+      color-mix(in srgb, var(--cor-cartaz) 38%, #0e0c09) 62%,
+      #0e0c09 100%
+    );
+}
+
+/* Furos de película nas laterais */
+.cartaz::before,
+.cartaz::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  background: repeating-linear-gradient(to bottom, rgba(14, 12, 9, 0.5) 0 7px, transparent 7px 15px);
+}
+
+.cartaz::before {
+  left: 9px;
+}
+
+.cartaz::after {
+  right: 9px;
+}
+
+/* A letra acompanha a largura do cartaz (unidade cqi = % do contêiner) */
+.cartaz__inicial {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding-bottom: 8%;
+  font-family: var(--fonte-titulo);
+  font-size: 52cqi;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(243, 233, 216, 0.92);
+  text-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
+}
+
+.cartaz__legenda {
+  position: absolute;
+  right: 24px;
+  bottom: 16px;
+  left: 24px;
+  overflow: hidden;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(243, 233, 216, 0.72);
+}
+
+.cartaz--grande {
+  aspect-ratio: 2 / 3;
+  box-shadow: var(--sombra);
+}
+
+.cartaz--grande .cartaz__legenda {
+  bottom: 20px;
+  font-size: 0.72rem;
+}

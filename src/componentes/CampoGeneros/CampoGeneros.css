@@ -1,0 +1,83 @@
+.campo-generos {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.campo-generos:focus-visible {
+  outline-offset: 8px;
+  border-radius: var(--raio-pequeno);
+}
+
+.campo-generos__dica {
+  margin: 4px 0 12px;
+}
+
+.campo-generos__opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.campo-generos__opcao {
+  position: relative;
+  cursor: pointer;
+}
+
+/* O checkbox fica invisível por cima da pílula, mas continua funcionando */
+.campo-generos__opcao input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.campo-generos__opcao span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--cor-borda-forte);
+  border-radius: 999px;
+  background-color: var(--cor-superficie-2);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--cor-texto-suave);
+  user-select: none;
+  transition:
+    background-color var(--transicao),
+    border-color var(--transicao),
+    color var(--transicao);
+}
+
+.campo-generos__opcao:hover span {
+  border-color: var(--cor-musgo-clara);
+  color: var(--cor-texto);
+}
+
+.campo-generos__opcao input:checked + span {
+  background-color: rgba(79, 107, 58, 0.4);
+  border-color: var(--cor-musgo-clara);
+  color: var(--cor-texto);
+}
+
+.campo-generos__opcao input:checked + span::before {
+  content: "✓";
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--cor-musgo-clara);
+}
+
+.campo-generos__opcao input:focus-visible + span {
+  outline: 2px solid var(--cor-musgo-clara);
+  outline-offset: 2px;
+}
+
+.campo-generos__erro {
+  display: block;
+  margin-top: 10px;
+}

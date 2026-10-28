@@ -1,0 +1,25 @@
+{
+  "name": "catalogo-filmes",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Catálogo de filmes (CRUD) com React, Vercel Functions e Neon Postgres",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "banco:criar": "node --env-file=.env.local scripts/executarSql.js banco/schema.sql",
+    "banco:exemplos": "node --env-file=.env.local scripts/executarSql.js banco/dados-exemplo.sql"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
+    "axios": "^1.21.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "vite": "^8.3.5"
+  }
+}

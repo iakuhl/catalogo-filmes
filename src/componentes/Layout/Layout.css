@@ -1,0 +1,16 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout__conteudo {
+  flex: 1;
+  padding-block: 48px 80px;
+}
+
+@media (max-width: 640px) {
+  .layout__conteudo {
+    padding-block: 32px 64px;
+  }
+}

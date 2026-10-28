@@ -1,0 +1,23 @@
+.carregando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 72px 16px;
+  color: var(--cor-texto-suave);
+}
+
+.carregando__roda {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--cor-borda-forte);
+  border-top-color: var(--cor-musgo-clara);
+  border-radius: 50%;
+  animation: carregando-girar 800ms linear infinite;
+}
+
+@keyframes carregando-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,94 @@
+.cartao-filme {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  transition:
+    transform var(--transicao),
+    border-color var(--transicao),
+    box-shadow var(--transicao);
+}
+
+.cartao-filme:hover {
+  transform: translateY(-4px);
+  border-color: rgba(147, 173, 110, 0.55);
+  box-shadow: var(--sombra);
+}
+
+.cartao-filme:has(.cartao-filme__link:focus-visible) {
+  outline: 2px solid var(--cor-musgo-clara);
+  outline-offset: 3px;
+}
+
+.cartao-filme .cartaz {
+  border-radius: 0;
+}
+
+.cartao-filme__info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 18px 4px;
+}
+
+.cartao-filme__titulo {
+  margin-bottom: 2px;
+  font-size: 1.22rem;
+}
+
+.cartao-filme__link {
+  color: var(--cor-texto);
+}
+
+.cartao-filme__link:hover {
+  text-decoration: none;
+}
+
+.cartao-filme__link:focus-visible {
+  outline: none;
+}
+
+/* Link "esticado": o ::after cobre o cartão e deixa tudo clicável */
+.cartao-filme__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.cartao-filme__meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+.cartao-filme .etiquetas-generos {
+  margin-top: 6px;
+}
+
+.cartao-filme__elenco {
+  display: -webkit-box;
+  margin: 4px 0 0;
+  overflow: hidden;
+  font-size: 0.82rem;
+  color: var(--cor-texto-apagado);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* As ações ficam acima do link esticado para continuarem clicáveis */
+.cartao-filme__acoes {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 12px;
+  padding: 8px 10px 10px;
+  border-top: 1px solid rgba(58, 48, 39, 0.7);
+}

@@ -1,0 +1,15 @@
+# Dependências e build
+node_modules
+dist
+
+# Vercel
+.vercel
+
+# Variáveis de ambiente (a DATABASE_URL nunca deve ir para o GitHub)
+.env*
+!.env.example
+
+# Logs e sistema
+*.log
+.DS_Store
+Thumbs.db

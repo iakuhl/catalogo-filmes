@@ -1,0 +1,25 @@
+.nao-encontrada {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 48px 0;
+  text-align: center;
+}
+
+.nao-encontrada__codigo {
+  margin: 0 0 8px;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(5rem, 18vw, 8rem);
+  font-style: italic;
+  line-height: 1;
+  color: var(--cor-ocre);
+}
+
+.nao-encontrada__titulo {
+  margin-bottom: 12px;
+  font-size: 2rem;
+}
+
+.nao-encontrada__texto {
+  margin: 0 0 28px;
+  color: var(--cor-texto-suave);
+}

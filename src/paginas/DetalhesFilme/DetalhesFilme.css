@@ -1,0 +1,142 @@
+.detalhes-filme__voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 32px;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+.detalhes-filme__voltar:hover {
+  text-decoration: none;
+  color: var(--cor-musgo-clara);
+}
+
+.detalhes-filme__grade {
+  display: grid;
+  grid-template-columns: minmax(220px, 340px) minmax(0, 1fr);
+  align-items: start;
+  gap: 56px;
+}
+
+/* O cartaz acompanha a rolagem em telas grandes */
+.detalhes-filme .cartaz--grande {
+  position: sticky;
+  top: 104px;
+}
+
+.detalhes-filme__titulo {
+  margin-bottom: 18px;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+}
+
+.detalhes-filme .etiquetas-generos .etiqueta {
+  padding: 4px 12px;
+  font-size: 0.8rem;
+}
+
+/* Ficha técnica em "células" separadas por linhas finas */
+.detalhes-filme__dados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  margin: 36px 0 44px;
+  overflow: hidden;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-borda);
+}
+
+.detalhes-filme__dados div {
+  padding: 18px 20px;
+  background-color: var(--cor-superficie);
+}
+
+.detalhes-filme__dados dt {
+  margin-bottom: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cor-texto-apagado);
+}
+
+.detalhes-filme__dados dd {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.detalhes-filme__secundario {
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+.detalhes-filme__elenco h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin-bottom: 18px;
+  font-size: 1.6rem;
+}
+
+.detalhes-filme__elenco h2 span {
+  font-family: var(--fonte-texto);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--cor-texto-apagado);
+}
+
+/* Lista numerada (01, 02, 03...) com o contador do CSS */
+.detalhes-filme__atores {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 0 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ator;
+}
+
+.detalhes-filme__atores li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(58, 48, 39, 0.75);
+  counter-increment: ator;
+}
+
+.detalhes-filme__atores li::before {
+  content: counter(ator, decimal-leading-zero);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--cor-ocre);
+}
+
+.detalhes-filme__sem-elenco {
+  margin: 0;
+  font-style: italic;
+  color: var(--cor-texto-apagado);
+}
+
+.detalhes-filme__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+@media (max-width: 760px) {
+  .detalhes-filme__grade {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .detalhes-filme .cartaz--grande {
+    position: static;
+    width: min(100%, 260px);
+  }
+}

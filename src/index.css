@@ -1,0 +1,275 @@
+/* =============================================================
+   Acervo · estilos globais
+   Paleta escura de tons terrosos (café, couro, argila) e verdes
+   (musgo, floresta). As cores ficam em variáveis no :root para
+   serem reutilizadas em todos os componentes.
+   ============================================================= */
+
+:root {
+  /* Fundos */
+  --cor-fundo: #15120e;
+  --cor-superficie: #1f1a15;
+  --cor-superficie-2: #2a231c;
+  --cor-borda: #3a3027;
+  --cor-borda-forte: #4d4034;
+
+  /* Texto */
+  --cor-texto: #ece3d4;
+  --cor-texto-suave: #b3a690;
+  --cor-texto-apagado: #978a74;
+
+  /* Verdes */
+  --cor-musgo: #4f6b3a;
+  --cor-musgo-hover: #5d7d45;
+  --cor-musgo-clara: #93ad6e;
+  --cor-floresta: #2e4430;
+
+  /* Terrosos */
+  --cor-terracota: #b8673f;
+  --cor-ocre: #c9a45c;
+  --cor-perigo: #a4432f;
+  --cor-perigo-hover: #b84d37;
+  --cor-erro: #e39a82;
+
+  /* Tipografia */
+  --fonte-titulo: "Fraunces", Georgia, "Times New Roman", serif;
+  --fonte-texto: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Medidas */
+  --raio: 14px;
+  --raio-pequeno: 8px;
+  --sombra: 0 22px 45px -20px rgba(0, 0, 0, 0.7);
+  --largura-maxima: 1180px;
+  --transicao: 180ms ease;
+
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  /* Brilhos suaves: verde no alto à esquerda, terracota à direita */
+  background-image:
+    radial-gradient(1100px 620px at 8% -12%, rgba(79, 107, 58, 0.2), transparent 62%),
+    radial-gradient(900px 520px at 100% 0%, rgba(184, 103, 63, 0.12), transparent 60%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--cor-musgo-clara);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+svg {
+  display: block;
+}
+
+::selection {
+  background: var(--cor-musgo);
+  color: var(--cor-texto);
+}
+
+:focus-visible {
+  outline: 2px solid var(--cor-musgo-clara);
+  outline-offset: 3px;
+}
+
+/* ---------- Utilitários de layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--largura-maxima);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.conteudo-estreito {
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+/* Esconde da tela, mas mantém para leitores de tela */
+.somente-leitor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Cabeçalho das páginas: sobretítulo, título e descrição */
+.cabecalho-pagina {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.cabecalho-pagina__sobretitulo {
+  margin: 0 0 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cor-ocre);
+}
+
+.cabecalho-pagina__titulo {
+  font-size: clamp(2rem, 4.5vw, 2.9rem);
+}
+
+.cabecalho-pagina__descricao {
+  margin: 10px 0 0;
+  color: var(--cor-texto-suave);
+}
+
+/* ---------- Formulários (compartilhado pelos campos) ---------- */
+
+.rotulo {
+  display: block;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.rotulo__obrigatorio {
+  color: var(--cor-ocre);
+}
+
+.rotulo__opcional {
+  font-weight: 400;
+  color: var(--cor-texto-apagado);
+}
+
+.entrada-texto {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  background-color: var(--cor-superficie-2);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  font-size: 1rem;
+  color: var(--cor-texto);
+  transition:
+    border-color var(--transicao),
+    box-shadow var(--transicao),
+    background-color var(--transicao);
+}
+
+.entrada-texto::placeholder {
+  color: var(--cor-texto-apagado);
+}
+
+.entrada-texto:hover:not(:disabled) {
+  border-color: var(--cor-borda-forte);
+}
+
+.entrada-texto:focus {
+  outline: none;
+  border-color: var(--cor-musgo-clara);
+  background-color: #2f2720;
+  box-shadow: 0 0 0 3px rgba(147, 173, 110, 0.22);
+}
+
+.entrada-texto:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.entrada-texto[aria-invalid="true"] {
+  border-color: var(--cor-erro);
+}
+
+.entrada-texto[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(227, 154, 130, 0.2);
+}
+
+/* Esconde as setinhas do campo numérico */
+.entrada-texto[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.entrada-texto[type="number"]::-webkit-inner-spin-button,
+.entrada-texto[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.texto-dica {
+  font-size: 0.8rem;
+  color: var(--cor-texto-apagado);
+}
+
+.texto-erro {
+  font-size: 0.82rem;
+  color: var(--cor-erro);
+}
+
+/* ---------- Telas pequenas e acessibilidade ---------- */
+
+@media (max-width: 640px) {
+  .container {
+    padding-inline: 16px;
+  }
+
+  .cabecalho-pagina {
+    margin-bottom: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
