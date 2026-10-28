@@ -84,12 +84,20 @@
   background-color: rgba(79, 107, 58, 0.18);
 }
 
-@media (max-width: 520px) {
+@media (max-width: 560px) {
   .cabecalho__slogan {
     display: none;
   }
 
   .cabecalho__link {
     padding: 8px 10px;
+    font-size: 0.88rem;
+  }
+}
+
+/* Em telas bem estreitas fica só o logo, para o menu caber */
+@media (max-width: 400px) {
+  .cabecalho__nome {
+    display: none;
   }
 }

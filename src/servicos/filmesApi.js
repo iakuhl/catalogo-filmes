@@ -1,15 +1,18 @@
 import api from "./api";
 
 // Funções que conversam com a API de filmes.
-// Cada uma devolve só os dados (resposta.data) para quem chamou.
+// O "codigo" é o nosso ID (a numeração própria que aparece no site).
+// Cada função devolve só os dados (resposta.data) para quem chamou.
 
-export async function listarFilmes() {
-  const resposta = await api.get("/filmes");
+// Uma página do catálogo:
+// { filmes: [{ codigo, titulo }], pagina, porPagina, total, totalPaginas }
+export async function listarFilmes(pagina) {
+  const resposta = await api.get("/filmes", { params: { pagina } });
   return resposta.data;
 }
 
-export async function buscarFilme(id) {
-  const resposta = await api.get(`/filmes/${id}`);
+export async function buscarFilme(codigo) {
+  const resposta = await api.get(`/filmes/${codigo}`);
   return resposta.data;
 }
 
@@ -18,13 +21,13 @@ export async function criarFilme(filme) {
   return resposta.data;
 }
 
-export async function atualizarFilme(id, filme) {
-  const resposta = await api.put(`/filmes/${id}`, filme);
+export async function atualizarFilme(codigo, filme) {
+  const resposta = await api.put(`/filmes/${codigo}`, filme);
   return resposta.data;
 }
 
-export async function excluirFilme(id) {
-  await api.delete(`/filmes/${id}`);
+export async function excluirFilme(codigo) {
+  await api.delete(`/filmes/${codigo}`);
 }
 
 // Transforma um erro do Axios em uma mensagem para mostrar na tela
@@ -38,5 +41,5 @@ export function mensagemDeErro(erro) {
   return "Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.";
 }
 
-// O filme não existe (404) ou o id do endereço é inválido, como em /filmes/abc (400)
+// O filme não existe (404) ou o ID é inválido, como em /ler/abc (400)
 export const filmeNaoExiste = (erro) => [400, 404].includes(erro.response?.status);

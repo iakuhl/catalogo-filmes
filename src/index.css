@@ -27,8 +27,8 @@
   /* Terrosos */
   --cor-terracota: #b8673f;
   --cor-ocre: #c9a45c;
-  --cor-perigo: #a4432f;
-  --cor-perigo-hover: #b84d37;
+  --cor-perigo: #b03a2e;
+  --cor-perigo-hover: #9a3226;
   --cor-erro: #e39a82;
 
   /* Tipografia */
@@ -249,6 +249,28 @@ svg {
 .texto-erro {
   font-size: 0.82rem;
   color: var(--cor-erro);
+}
+
+/* ---------- Telas com busca por ID (Alterar e Remover) ---------- */
+
+.pagina-busca .aviso {
+  margin-bottom: 28px;
+}
+
+.pagina-busca__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pagina-busca__encontrado {
+  margin: 0 0 16px;
+  font-size: 0.92rem;
+  color: var(--cor-texto-suave);
+}
+
+.pagina-busca__encontrado strong {
+  color: var(--cor-ocre);
 }
 
 /* ---------- Telas pequenas e acessibilidade ---------- */

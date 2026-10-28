@@ -1,14 +1,26 @@
-import { buscarTodos, buscarPorId, inserir, atualizar, excluir } from "../servidor/filmesRepositorio.js";
-import { normalizarFilme, validarFilme } from "../compartilhado/regrasFilme.js";
+import {
+  buscarPagina,
+  buscarPorCodigo,
+  inserir,
+  atualizar,
+  excluir,
+} from "../servidor/filmesRepositorio.js";
+import {
+  FILMES_POR_PAGINA,
+  ehCodigoValido,
+  normalizarFilme,
+  validarFilme,
+} from "../compartilhado/regrasFilme.js";
 
 // Ponto de entrada da API. Na Vercel este arquivo vira uma Function, e o
 // vercel.json encaminha para ela todas as requisições /api/*.
+// O :codigo é o nosso ID (a numeração própria), não o id interno do banco.
 //
-//   GET    /api/filmes        lista todos os filmes
-//   POST   /api/filmes        cadastra um filme
-//   GET    /api/filmes/:id    busca um filme
-//   PUT    /api/filmes/:id    altera um filme
-//   DELETE /api/filmes/:id    exclui um filme
+//   GET    /api/filmes?pagina=1   lista 25 filmes por página (nosso ID e título)
+//   POST   /api/filmes            cadastra um filme (o nosso ID é gerado na hora)
+//   GET    /api/filmes/:codigo    busca um filme
+//   PUT    /api/filmes/:codigo    altera um filme
+//   DELETE /api/filmes/:codigo    exclui um filme
 
 // Erro "esperado" (ex.: dados inválidos), que vira uma resposta com esse status
 class ErroDaRequisicao extends Error {
@@ -27,7 +39,8 @@ const responder = (status, dados, cabecalhos = {}) => {
     : Response.json(dados, { status, headers });
 };
 
-const filmeNaoEncontrado = () => responder(404, { mensagem: "Filme não encontrado." });
+const filmeNaoEncontrado = (codigo) =>
+  responder(404, { mensagem: `Não existe filme com o ID ${codigo}.` });
 
 const metodoNaoPermitido = (permitidos) =>
   responder(405, { mensagem: "Método não permitido." }, { Allow: permitidos });
@@ -50,21 +63,41 @@ async function lerFilme(requisicao) {
   return filme;
 }
 
-async function rotear(requisicao) {
-  const { pathname } = new URL(requisicao.url);
+// GET /api/filmes?pagina=N
+async function listar(url) {
+  const textoPagina = url.searchParams.get("pagina") ?? "1";
 
-  // "/api/filmes/7" → recurso = "filmes", id = "7"
-  const [recurso, id, ...resto] = pathname.replace(/^\/api/, "").split("/").filter(Boolean);
+  if (!/^\d{1,6}$/.test(textoPagina) || Number(textoPagina) < 1) {
+    return responder(400, { mensagem: "Página inválida." });
+  }
+
+  const pagina = Number(textoPagina);
+  const { filmes, total } = await buscarPagina(pagina, FILMES_POR_PAGINA);
+
+  return responder(200, {
+    filmes,
+    pagina,
+    porPagina: FILMES_POR_PAGINA,
+    total,
+    totalPaginas: Math.max(1, Math.ceil(total / FILMES_POR_PAGINA)),
+  });
+}
+
+async function rotear(requisicao) {
+  const url = new URL(requisicao.url);
+
+  // "/api/filmes/7" → recurso = "filmes", codigo = "7"
+  const [recurso, codigo, ...resto] = url.pathname.replace(/^\/api/, "").split("/").filter(Boolean);
 
   if (recurso !== "filmes" || resto.length > 0) {
     return responder(404, { mensagem: "Rota não encontrada." });
   }
 
   // /api/filmes
-  if (id === undefined) {
+  if (codigo === undefined) {
     switch (requisicao.method) {
       case "GET":
-        return responder(200, await buscarTodos());
+        return listar(url);
       case "POST":
         return responder(201, await inserir(await lerFilme(requisicao)));
       default:
@@ -72,23 +105,23 @@ async function rotear(requisicao) {
     }
   }
 
-  // /api/filmes/:id (até 9 dígitos, para caber no INTEGER do Postgres)
-  if (!/^\d{1,9}$/.test(id)) {
+  // /api/filmes/:codigo
+  if (!ehCodigoValido(codigo)) {
     return responder(400, { mensagem: "ID de filme inválido." });
   }
-  const idFilme = Number(id);
+  const codigoFilme = Number(codigo);
 
   switch (requisicao.method) {
     case "GET": {
-      const filme = await buscarPorId(idFilme);
-      return filme ? responder(200, filme) : filmeNaoEncontrado();
+      const filme = await buscarPorCodigo(codigoFilme);
+      return filme ? responder(200, filme) : filmeNaoEncontrado(codigoFilme);
     }
     case "PUT": {
-      const filme = await atualizar(idFilme, await lerFilme(requisicao));
-      return filme ? responder(200, filme) : filmeNaoEncontrado();
+      const filme = await atualizar(codigoFilme, await lerFilme(requisicao));
+      return filme ? responder(200, filme) : filmeNaoEncontrado(codigoFilme);
     }
     case "DELETE":
-      return (await excluir(idFilme)) ? responder(204) : filmeNaoEncontrado();
+      return (await excluir(codigoFilme)) ? responder(204) : filmeNaoEncontrado(codigoFilme);
     default:
       return metodoNaoPermitido("GET, PUT, DELETE");
   }

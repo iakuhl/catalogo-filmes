@@ -23,13 +23,17 @@ const Cabecalho = () => {
           </span>
         </Link>
 
-        {/* NavLink adiciona a classe "active" no link da página atual */}
-        <nav className="cabecalho__navegacao" aria-label="Navegação principal">
-          <NavLink to="/" end className="cabecalho__link">
-            Catálogo
+        {/* Menu presente em todas as telas. O logo (acima) leva ao início.
+            NavLink adiciona a classe "active" no link da tela atual. */}
+        <nav className="cabecalho__navegacao" aria-label="Menu principal">
+          <NavLink to="/criar" className="cabecalho__link">
+            Criar
           </NavLink>
-          <NavLink to="/filmes/novo" className="cabecalho__link">
-            Novo filme
+          <NavLink to="/alterar" className="cabecalho__link">
+            Alterar
+          </NavLink>
+          <NavLink to="/remover" className="cabecalho__link">
+            Remover
           </NavLink>
         </nav>
       </div>

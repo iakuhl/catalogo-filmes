@@ -32,6 +32,18 @@
   color: var(--cor-texto-suave);
 }
 
+.modal__alerta {
+  display: flex;
+  gap: 10px;
+  margin: -12px 0 28px;
+  padding: 12px 14px;
+  border: 1px solid rgba(227, 154, 130, 0.35);
+  border-radius: var(--raio-pequeno);
+  background: rgba(176, 58, 46, 0.16);
+  font-weight: 600;
+  color: var(--cor-erro);
+}
+
 .modal__acoes {
   display: flex;
   flex-wrap: wrap;

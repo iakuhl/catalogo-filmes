@@ -6,6 +6,7 @@ import "./ModalConfirmacao.css";
 // showModal() abre a janela por cima da página, prende o foco nela
 // e permite fechar com a tecla Esc.
 //   aberto, titulo, mensagem, textoConfirmar
+//   alerta:      aviso em destaque (ex.: "Esta operação é irreversível.")
 //   processando: enquanto true, os botões ficam desabilitados
 //   aoConfirmar / aoCancelar: funções chamadas pelos botões
 const ModalConfirmacao = (props) => {
@@ -44,9 +45,14 @@ const ModalConfirmacao = (props) => {
         <h2 id="modal-titulo" className="modal__titulo">
           {props.titulo}
         </h2>
-        <p id="modal-mensagem" className="modal__mensagem">
-          {props.mensagem}
-        </p>
+        <div id="modal-mensagem">
+          <p className="modal__mensagem">{props.mensagem}</p>
+          {props.alerta && (
+            <p className="modal__alerta">
+              <span aria-hidden="true">⚠</span> {props.alerta}
+            </p>
+          )}
+        </div>
 
         <div className="modal__acoes">
           <Botao variante="secundario" aoClicar={props.aoCancelar} desabilitado={props.processando}>

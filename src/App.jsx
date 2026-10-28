@@ -1,21 +1,23 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./componentes/Layout/Layout";
-import ListaFilmes from "./paginas/ListaFilmes/ListaFilmes";
-import DetalhesFilme from "./paginas/DetalhesFilme/DetalhesFilme";
-import NovoFilme from "./paginas/NovoFilme/NovoFilme";
-import EditarFilme from "./paginas/EditarFilme/EditarFilme";
+import Inicio from "./paginas/Inicio/Inicio";
+import Ler from "./paginas/Ler/Ler";
+import Criar from "./paginas/Criar/Criar";
+import Alterar from "./paginas/Alterar/Alterar";
+import Remover from "./paginas/Remover/Remover";
 import NaoEncontrada from "./paginas/NaoEncontrada/NaoEncontrada";
 
 function App() {
   return (
     <Routes>
-      {/* Todas as páginas são exibidas dentro do Layout (cabeçalho, rodapé e notificações) */}
+      {/* Todas as telas são exibidas dentro do Layout (menu superior e notificações) */}
       <Route element={<Layout />}>
-        <Route path="/" element={<ListaFilmes />} />
-        <Route path="/filmes/novo" element={<NovoFilme />} />
-        <Route path="/filmes/:id" element={<DetalhesFilme />} />
-        <Route path="/filmes/:id/editar" element={<EditarFilme />} />
+        <Route path="/" element={<Inicio />} />
+        <Route path="/ler/:codigo" element={<Ler />} />
+        <Route path="/criar" element={<Criar />} />
+        <Route path="/alterar" element={<Alterar />} />
+        <Route path="/remover" element={<Remover />} />
         <Route path="*" element={<NaoEncontrada />} />
       </Route>
     </Routes>

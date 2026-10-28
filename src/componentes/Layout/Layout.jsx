@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Cabecalho from "../Cabecalho/Cabecalho";
-import Rodape from "../Rodape/Rodape";
 import Notificacao from "../Notificacao/Notificacao";
 import "./Layout.css";
 
+// Estrutura comum a todas as telas: o menu superior e o conteúdo da rota
 const Layout = () => {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
 
-  // Notificação exibida no canto da tela (ex.: "Filme cadastrado").
+  // Notificação exibida no canto da tela (ex.: "Filme criado").
   // Ela fica no Layout porque o Layout continua na tela quando a página
   // muda; assim a mensagem aparece mesmo depois de um navigate().
   const [notificacao, setNotificacao] = useState(null);
@@ -20,25 +20,23 @@ const Layout = () => {
   // Esconde a notificação depois de alguns segundos
   useEffect(() => {
     if (!notificacao) return;
-    const temporizador = setTimeout(() => setNotificacao(null), 4500);
+    const temporizador = setTimeout(() => setNotificacao(null), 5000);
     return () => clearTimeout(temporizador);
   }, [notificacao]);
 
-  // Ao trocar de página, volta para o topo
+  // Ao trocar de tela (ou de página da lista), volta para o topo
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, search]);
 
   return (
     <div className="layout">
       <Cabecalho />
 
       <main className="layout__conteudo container">
-        {/* As páginas acessam notificar() com useOutletContext() */}
+        {/* As telas acessam notificar() com useOutletContext() */}
         <Outlet context={{ notificar }} />
       </main>
-
-      <Rodape />
 
       <Notificacao notificacao={notificacao} aoFechar={() => setNotificacao(null)} />
     </div>

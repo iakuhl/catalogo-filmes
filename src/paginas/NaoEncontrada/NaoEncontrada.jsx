@@ -14,7 +14,7 @@ const NaoEncontrada = (props) => {
       <p className="nao-encontrada__texto">
         {props.mensagem || "O endereço acessado não existe ou foi alterado."}
       </p>
-      <Botao para="/">Voltar ao catálogo</Botao>
+      <Botao para="/">Voltar ao início</Botao>
     </section>
   );
 };

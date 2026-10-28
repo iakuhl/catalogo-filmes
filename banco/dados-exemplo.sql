@@ -1,7 +1,9 @@
 -- Filmes de exemplo (opcional). Rode uma única vez, depois do schema.sql:
 --   * cole no SQL Editor do Neon; ou
 --   * rode `npm run banco:exemplos`.
--- Os gêneros seguem a lista e a ordem de compartilhado/regrasFilme.js.
+-- O id e o codigo (nosso ID) são gerados pelo banco: numa tabela recém-criada,
+-- estes filmes recebem os IDs 1 a 7. Os gêneros seguem a lista e a ordem de
+-- compartilhado/regrasFilme.js.
 
 INSERT INTO filmes (titulo, ano_lancamento, duracao_minutos, diretor, generos, elenco) VALUES
   ('O Poderoso Chefão', 1972, 175, 'Francis Ford Coppola',

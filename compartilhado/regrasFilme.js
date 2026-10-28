@@ -21,6 +21,7 @@ export const GENEROS = [
 ];
 
 export const LIMITE_ELENCO = 50;
+export const FILMES_POR_PAGINA = 25; // lista da tela inicial
 export const ANO_MINIMO = 1888; // ano do filme mais antigo preservado
 export const DURACAO_MAXIMA = 999;
 export const TAMANHO_MAXIMO = { titulo: 200, diretor: 150, ator: 100 };
@@ -29,6 +30,13 @@ export const TAMANHO_MAXIMO = { titulo: 200, diretor: 150, ator: 100 };
 export const anoMaximo = () => new Date().getFullYear() + 5;
 
 const paraTexto = (valor) => (valor === null || valor === undefined ? "" : String(valor).trim());
+
+// Nosso ID (codigo): número inteiro positivo de até 9 dígitos,
+// para caber na coluna INTEGER do Postgres
+export const ehCodigoValido = (valor) => {
+  const texto = paraTexto(valor);
+  return /^\d{1,9}$/.test(texto) && Number(texto) > 0;
+};
 
 // Campos numéricos vazios viram null (para a mensagem "Informe...")
 const paraNumero = (valor) => (paraTexto(valor) === "" ? null : Number(valor));

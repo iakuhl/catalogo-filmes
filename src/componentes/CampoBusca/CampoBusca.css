@@ -1,0 +1,44 @@
+.campo-busca {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.campo-busca__caixa {
+  position: relative;
+  max-width: 360px;
+}
+
+.campo-busca__caixa .entrada-texto {
+  padding-right: 58px;
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Botão da lupa, encaixado dentro da caixa de texto */
+.campo-busca__lupa {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background-color: var(--cor-musgo);
+  color: var(--cor-texto);
+  cursor: pointer;
+  transition: background-color var(--transicao);
+}
+
+.campo-busca__lupa:hover {
+  background-color: var(--cor-musgo-hover);
+}
+
+.campo-busca__lupa svg {
+  width: 18px;
+  height: 18px;
+}
